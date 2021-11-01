@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Server API Test</title>
+    <script type="text/javascript">
+        function addTokenToQueryString(theForm) {
+            var formAction = theForm.action;
+            console.log("Form action", formAction);
+            if(formAction.indexOf("token=") < 0){
+                var separator = formAction.indexOf("?") < 0 ? "?" : "&";
+                formAction += separator + "token=" + theForm["token"].value;
+                console.log("New form action", formAction);
+            } else {
+            	var startidx = formAction.indexOf("token=") + 6;
+            	var endidx = formAction.indexOf("&", startidx);
+            	var endPart = "";
+            	if (endidx > startidx) {
+            		endPart = formAction.substring(endidx);
+            	}
+            	formAction = formAction.substring(0, startidx) + theForm["token"].value + endPart;
+            }
+            theForm.action = formAction;
+        }
+    </script>
+</head>
+<h2>Users</h2>
+<h3>Login</h3>
+<form name="loginForm" method="POST" action="./ws/users/login" target="right">
+    <label for="email">E-mail</label>
+    <input type="text" id="email" name="email" value="nd7275@gmail.com" required> <br>
+    <label for="password">Password</label>
+    <input type="text" id="password" name="password" value="abc" required> <br>
+    <label for="lang">Language</label>
+    <select name="lang" id="lang">
+        <option value="en">English</option>
+        <option value="ro">Română</option>
+        <option value="hu">Magyar</option>
+    </select>
+    <input type="submit" name="submit" value="Send" >
+</form>
+<h3>Change Password</h3>
+<form name="loginForm" method="POST" action="./ws/users/password_change" target="right" onsubmit="addTokenToQueryString(this)">
+    <label for="token">Token</label>
+    <input type="text" name="token" id="token" value="1" required> <br>
+    <label for="old_password">Old password</label>
+    <input type="text" id="old_password" name="old_password" value="abc" required> <br>
+    <label for="new_password">New password</label>
+    <input type="text" id="new_password" name="new_password" value="abc" required> <br>
+    <input type="submit" name="submit" value="Send" >
+</form>
+<h3>Register user</h3>
+<form name="registerForm" method="POST" action="./ws/users/register" target="right" onsubmit="addTokenToQueryString(this)">
+    <input type="text" name="first_name" placeholder="First name" required> <br>
+    <input type="text" name="last_name" placeholder="Last name" required> <br>
+    <input type="text" name="birth_year" placeholder="Birth year: 2000" required>
+    <select name="birth_month">
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+    </select>
+    <select name="birth_day">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+        <option value="21">21</option>
+        <option value="22">22</option>
+        <option value="23">23</option>
+        <option value="24">24</option>
+        <option value="25">25</option>
+        <option value="26">26</option>
+        <option value="27">27</option>
+        <option value="28">28</option>
+        <option value="29">29</option>
+        <option value="30">30</option>
+        <option value="31">31</option>
+    </select> <br>
+    <input type="text" name="username" placeholder="Username: nd7275@gmail.com"> <br>
+    <input type="text" name="email" placeholder="Email: nd7275@gmail.com" required> <br>
+    <input type="text" name="password" placeholder="Password: abc" required> <br>
+    <input type="text" name="phone_number" placeholder="Phone number: " required> <br>
+    <input type="text" name="skill" placeholder="Your skills: math, english " required> <br>
+    <input type="text" name="city" placeholder="Your city " required> <br>
+    <label for="lang">Language</label>
+    <select name="lang" id="lang">
+        <option value="en">English</option>
+        <option value="ro">Română</option>
+        <option value="hu">Magyar</option>
+    </select>
+    <input type="submit" name="submit" value="Send" >
+</form>
+
+<h3>Update user</h3>
+<form name="updateForm" method="POST" action="./ws/users/update" target="right" onsubmit="addTokenToQueryString(this)">
+    <input type="text" name="first_name" placeholder="First name"> <br>
+    <input type="text" name="last_name" placeholder="Last name"> <br>
+    <input type="text" name="birth_year" placeholder="Birth year: 2000">
+    <select name="birth_month">
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+    </select>
+    <select name="birth_day">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+        <option value="21">21</option>
+        <option value="22">22</option>
+        <option value="23">23</option>
+        <option value="24">24</option>
+        <option value="25">25</option>
+        <option value="26">26</option>
+        <option value="27">27</option>
+        <option value="28">28</option>
+        <option value="29">29</option>
+        <option value="30">30</option>
+        <option value="31">31</option>
+    </select> <br>
+    <input type="text" name="username" placeholder="Username: nd7275@gmail.com"> <br>
+    <input type="text" name="email" placeholder="Email: nd7275@gmail.com"> <br>
+    <input type="text" name="phone_number" placeholder="phone number"> <br>
+    <input type="text" name="skill" placeholder="Your skills: "> <br>
+    <input type="text" name="city" placeholder="Current city"> <br>
+    <input type="text" name="picture_url" placeholder="picture_url"> <br>
+    <input type="text" name="biography" placeholder="Biography:"> <br>
+    <input type="text" name="educational_background" placeholder="Your educational background: "> <br>
+	<input type="text" name="token" placeholder="user token" required> <br>
+    <label for="lang">Language</label>
+    <select name="lang" id="lang">
+        <option value="en">English</option>
+        <option value="ro">Română</option>
+        <option value="hu">Magyar</option>
+    </select>
+    <input type="submit" name="submit" value="Send" >
+</form>
+<h3>Generate password</h3>
+<form name="loginForm" method="POST" action="./ws/users/reset_password" target="right">
+    <label for="email">E-mail</label>
+    <input type="text" id="email" name="email" value="1" >
+    <input type="submit" name="submit" value="Send" >
+</form>
+<h2>Activate account</h2>
+<form name="activateForm" method="GET" action="./ws/users/activateAccount" target="right">
+    <label for="token">Token</label>
+    <input type="text" id="token" name="token" value="" required>
+    <input type="submit" name="submit" value="Send" >
+</form>
+
+<h2>List User Public Information</h2>
+<form name="listUserInformation" method="POST" action="./ws/users/listUserInformation" target="right">
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username"required><br>
+    <input type="submit" name="submit" value="Send" >
+</form>
+
+<h2>Offers</h2>
+<h3>Tutor publish</h3>
+<form name="publishForm" method="POST" action="./ws/offer/publish" target="right" onsubmit="addTokenToQueryString(this)">
+    <label for="token">Token</label>
+    <input type="text" name="token" id="token" placeholder="User token"><br>
+    <label for="subject">Subject</label>
+    <input type="text" name="subject" id="subject" placeholder="subject"><br>
+    <label for="classnr">Grade</label>
+    <input type="text" name="classnr" id="classnr" placeholder="grade"><br>
+    <label for="nrStudents">Nr. students</label>
+    <input type="text" name="nrStudents" id="nrStudents" placeholder="nrStudents"><br>
+    <label for="level">Level</label>
+    <input type="text" name="level" id="level" placeholder="beginner, intermediate, professional"><br>
+    <label for="location">Location</label>
+    <input type="text" name="location" id="location" placeholder="location"><br>
+    <label for="price">Price/1 Hour</label>
+    <input type="text" name="price" id="price" placeholder="price"><br>
+    <label for="periodically">Periodically</label>
+    <select name="periodically" id="periodically">
+        <option value="true">True</option>
+        <option value="false">False</option>
+    </select><br>
+    <label for="dates">Dates</label>
+    <input type="text" name="dates" id="dates" placeholder="Dates: 2019-09-25_2019-09-27,2019-10-01_2019-10-15"><br>
+    <label for="hours">Hours</label>
+    <input type="text" name="hours" id="hours" placeholder="Hours: 12:00_14:15,16:20_19:45"><br>
+    <label for="meetingType">Meeting type</label>
+    <select name="meetingType" id="meetingType">
+        <option value="online">Online</option>
+        <option value="offline">Offline</option>
+    </select><br>
+    <input type="submit" name="submit" value="Send">
+</form>
+
+<h3>Update offer information</h3>
+<form name="updateOfferForm" method="POST" action="./ws/offer/updateOffer" target="right" onsubmit="addTokenToQueryString(this)">
+    <label for="token">Token</label>
+    <input type="text" name="token" id="token" placeholder="Token" required> <br>
+    <label for="subject">Subject</label>
+    <input type="text" name="subject" id="subject" placeholder="Subject" required> <br>
+    <label for="nrclass">Grade</label>
+    <input type="text" name="nrclass" id="nrclass" placeholder="Grade" required> <br>
+    <label for="price">Price</label>
+    <input type="text" name="price" id="price" placeholder="New price" > <br>
+    <label for="meetingType">Meeting type</label>
+    <select name="meetingType" id="meetingType">
+        <option value="online">Online</option>
+        <option value="offline">Offline</option>
+    </select><br>
+    <label for="location">Location</label>
+    <input type="text" name="location" id="location" placeholder="Location" > <br>
+    <label for="numberOfStudents">Number of students</label>
+    <input type="text" name="numberOfStudents" id="numberOfStudents" placeholder="Number of students" > <br>
+    <label for="periodically">Periodically</label>
+    <select name="periodically" id="periodically">
+        <option>NULL</option>
+        <option value="true">True</option>
+        <option value="false">False</option>
+    </select><br>
+    <label for="level">Level</label>
+    <input type="text" name="level" id="level" placeholder="beginner, intermediate, professional"><br>
+    <input type="submit" name="submit" value="Send">
+</form>
+
+<h3>Update offer date status</h3>
+<form name="updateDateStatus" method="post" action="./ws/offer/updateOfferDateStatus" target="right" onsubmit="addTokenToQueryString(this)">
+    <label for="token">Token</label>
+    <input type="text" name="token" id="token" placeholder="Token" required> <br>
+    <label for="subject">Subject</label>
+    <input type="text" name="subject" id="subject" placeholder="Subject" required> <br>
+    <label for="nrClass">Grade</label>
+    <input type="text" name="nrClass" id="nrClass" placeholder="Grade" required> <br>
+    <label for="status">Status</label>
+    <select name="status" id="status">
+        <option value="OCCUPIED">Occupied</option>
+        <option value="ACTIVE">Active</option>
+        <option value="UNAVAILABLE">Unavailable</option>
+    </select><br>
+    <label for="date">Date </label>
+    <input type="text" name="date" id="date" placeholder="Date (eg. 2019-05-10_2019-05-18)" required> <br>
+    <label for="hour">Hour </label>
+    <input type="text" name="hour" id="hour" placeholder="Hour (eg. 16:15_18:00)" required> <br>
+    <label for="level">Level</label>
+    <input type="text" name="level" id="level" placeholder="beginner, intermediate, professional"><br>
+    <input type="submit" name="submit" value="Send">
+</form>
+
+<h3>List offers from user</h3>
+<form name="listOffersFromTutor" method="POST" action="./ws/offer/listOffersFromTutor" target="right" onsubmit="addTokenToQueryString(this)">
+    <label for="token">Token</label>
+    <input type="text" name="token" id="token" placeholder="Token" required> <br>
+    <input type="submit" name="submit" value="Send">
+</form>
+
+<h3>List offers from user on given date</h3>
+<form name="listOfferFromUserOnDate" method="post" action="./ws/offer/listOffersFromUserOnDate" target="right" onsubmit="addTokenToQueryString(this)">
+    <label for="token">Token</label>
+    <input type="text" name="token" id="token" placeholder="Token" required> <br>
+    <label for="subject">Subject</label>
+    <input type="text" name="subject" id="subject" placeholder="Subject" required> <br>
+    <label for="grade">Grade</label>
+    <input type="text" name="grade" id="grade" placeholder="Grade" required> <br>
+    <label for="date">Date </label>
+    <input type="text" name="date" id="date" placeholder="Date (eg. 2019-05-10_2019-05-18)" required> <br>
+    <label for="hour">Hour </label>
+    <input type="text" name="hour" id="hour" placeholder="Hour (eg. 16:15_18:00)" required> <br>
+    <label for="status">Status</label>
+    <select name="status" id="status">
+        <option value="OCCUPIED">Occupied</option>
+        <option value="ACTIVE">Active</option>
+        <option value="UNAVAILABLE">Unavailable</option>
+        <option >All</option>
+    </select><br>
+    <label for="level">Level</label>
+    <input type="text" name="level" id="level" placeholder="beginner, intermediate, professional"><br>
+    <input type="submit" name="submit" value="Send">
+</form>
+
+<h2>Student Requests</h2>
+<h3>Publish request</h3>
+<form name="setRequest" method="post" action="./ws/request/set" target="right" onsubmit="addTokenToQueryString(this)">
+    <label for="token">Token</label>
+    <input type="text" name="token" id="token" placeholder="User token"><br>
+    <label for="subject">Subject</label>
+    <input type="text" name="subject" id="subject" placeholder="subject"><br>
+    <label for="grade">Grade</label>
+    <input type="text" name="grade" id="grade" placeholder="grade"><br>
+    <label for="level">Level</label>
+    <input type="text" name="level" id="level" placeholder="beginner, intermediate, professional"><br>
+    <label for="dates">Dates</label>
+    <input type="text" name="dates" id="dates" placeholder="Dates: 2019-09-25_2019-09-27,2019-10-01_2019-10-15"><br>
+    <label for="meetingType">Meeting type</label>
+    <select name="meetingType" id="meetingType">
+        <option value="online">Online</option>
+        <option value="offline">Offline</option>
+    </select><br>
+    <input type="submit" name="submit" value="Send">
+</form>
+
+<h3>Delete request</h3>
+<form name="deleteRequest" method="post" action="./ws/request/delete" target="right" onsubmit="addTokenToQueryString(this)">
+    <label for="token">Token</label>
+    <input type="text" name="token" id="token" placeholder="User token"><br>
+    <label for="subject">Subject</label>
+    <input type="text" name="subject" id="subject" placeholder="subject"><br>
+    <label for="grade">Grade</label>
+    <input type="text" name="grade" id="grade" placeholder="grade"><br>
+    <label for="level">Level</label>
+    <input type="text" name="level" id="level" placeholder="beginner, intermediate, professional"><br>
+
+    <input type="submit" name="submit" value="Send">
+</form>
+
+<h2>Review</h2>
+<h3>Set review</h3>
+<form name="setReview" method="post" action="./ws/review/set" target="right" onsubmit="addTokenToQueryString(this)">
+    <label for="token">Token</label>
+    <input type="text" name="token" id="token" placeholder="User token"><br>
+    <label for="reviewedUsername">Reviewed Username</label>
+    <input type="text" name="reviewedUsername" id="reviewedUsername" placeholder="username"><br>
+    <label for="review">Rating</label>
+    <select name="review" id="review">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select> <br>
+    <label for="comment">Comment</label><br>
+    <textarea name="comment" id="comment" rows="5" cols="20">
+    </textarea><br>
+    <input type="submit" name="submit" value="Send">
+</form>
+
+<h2>Delete review</h2>
+<form name="deleteReview" method="post" action="./ws/review/delete" target="right" onsubmit="addTokenToQueryString(this)">
+    <label for="token">Token</label>
+    <input type="text" name="token" id="token" placeholder="User token"><br>
+    <label for="reviewedUsername">Reviewed Username</label>
+    <input type="text" name="reviewedUsername" id="reviewedUsername" placeholder="username"><br>
+    <input type="submit" name="submit" value="Send">
+</form>
+
+<h3> Automatic Matching Algorithm</h3>
+<h2> Get results</h2>
+<form name="getAMAresults" method="post" action="./ws/offer/getAMAresults" target="right">
+    <label for="requestid">RequestId</label>
+    <input type="text" name="requestId" id="requestId" required> <br>
+    <label for="numberOfResults">Number of results</label>
+    <input type="text" name="numberOfResults" id="numberOfResults" required> <br>
+    <input type="submit" name="submit" value="Send">
+</form>
+
+<h3>Search</h3>
+<h2>Simple search</h2>
+<form name="simpleSearch" method="post" action="./ws/search/word" target="right">
+    <label for="text">Text</label>
+    <input type="text" id="text" name="text" required>
+    <label for="type">Type</label>
+    <select name="type" id="type">
+        <option value="offer">Offer</option>
+        <option value="request">Request</option>
+    </select>
+    <input type="submit" name="submit" value="Send">
+</form>
+<h2>Filter search Offer</h2>
+<form name="offerFilerSearch" method="POST" action="./ws/search/filterOffer" target="right">
+    <label for="subject">Subject</label>
+    <input type="text" name="subject" id="subject" placeholder="subject"><br>
+    <label for="grade">Grade</label>
+    <input type="text" name="grade" id="grade" placeholder="grade"><br>
+    <label for="nrStudents">Nr. students</label>
+    <input type="text" name="nrStudents" id="nrStudents" placeholder="nrStudents"><br>
+    <label for="level">Level</label>
+    <input type="text" name="level" id="level" placeholder="beginner, intermediate, professional"><br>
+    <label for="location">Location</label>
+    <input type="text" name="location" id="location" placeholder="location"><br>
+    <label for="dates">Dates</label>
+    <input type="text" name="dates" id="dates" placeholder="Dates: 2019-09-25_2019-09-27,2019-10-01_2019-10-15"><br>
+    <label for="meetingType">Meeting type</label>
+    <select name="meetingType" id="meetingType">
+        <option value="online">Online</option>
+        <option value="offline">Offline</option>
+    </select><br>
+    <input type="submit" name="submit" value="Send">
+</form>
+<h2>Filter search Request</h2>
+<form name="requestFilerSearch" method="POST" action="./ws/search/filterRequest" target="right">
+    <label for="subject">Subject</label>
+    <input type="text" name="subject" id="subject" placeholder="subject"><br>
+    <label for="grade">Grade</label>
+    <input type="text" name="grade" id="grade" placeholder="grade"><br>
+    <label for="level">Level</label>
+    <input type="text" name="level" id="level" placeholder="beginner, intermediate, professional"><br>
+    <label for="meetingType">Meeting type</label>
+    <select name="meetingType" id="meetingType">
+        <option value="online">Online</option>
+        <option value="offline">Offline</option>
+    </select><br>
+    <label for="dates">Dates</label>
+    <input type="text" name="dates" id="dates" placeholder="Dates: 2019-09-25_2019-09-27,2019-10-01_2019-10-15"><br>
+    <input type="submit" name="submit" value="Send">
+</form>
+<h2>Interactions</h2>
+<h3>Save interaction</h3>
+<form name = "requestInteraction" method="POST" action="./ws/interaction/requestInteraction" target="right" onsubmit="addTokenToQueryString(this)">
+    <label for="token">Token</label>
+    <input type="text" name="token" id="token" required><br>
+    <label for="receiverUsername">Requester username</label>
+    <input type="text" name="receiverUsername" id="receiverUsername" required><br>
+    <label for="description">Description</label>
+    <input type="text" name="description" id="description" required><br>
+    <input type="submit" name="submit" value="Send">
+</form>
+<h3>Update interaction</h3>
+<form name = "updateStatus" method="POST" action="./ws/interaction/updateStatus" target="right" onsubmit="addTokenToQueryString(this)">
+    <label for="token">Token</label>
+    <input type="text" name="token" id="token" required><br>
+    <label for="token">Sender token</label>
+    <input type="text" name="token" id="token" required><br>
+    <label for="status">Status</label>
+    <select name="status" id="status">
+        <option value="ACCEPTED">Accepted</option>
+        <option value="DENIED">Denied</option>
+    </select><br>
+    <input type="submit" name="submit" value="Send">
+</form>
+<h2>Subjects</h2>
+<form name = "getSubjects" method="post" action="./ws/search/getSubjects" target="right">
+    <input type="submit" name="submit" value="Send">
+</form>
+<h2>Grades</h2>
+<form name="getGrades" method="post" action="./ws/search/getGrades" target="right">
+    <input type="submit" name="submit" value="Send">
+</form>
+<h2>Get Token</h2>
+<form name="getToken" method="post" action="./ws/users/getToken" target="right">
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username" required>
+    <input type="submit" name="submit" value="Send">
+</form>
+<h2>Grades</h2>
+<form name="getUsername" method="post" action="./ws/users/getUsername" target="right" onsubmit="addTokenToQueryString(this)">
+    <label for="token">Token</label>
+    <input type="text" name="token" id="token" required>
+    <input type="submit" name="submit" value="Send">
+</form>
+<h2> List notifications from user </h2>
+<form name="getNotifications" method="post" action="./ws/users/getNotifications" target="right" onsubmit="addTokenToQueryString(this)">
+    <label for="token">Token</label>
+    <input type="text" name="token" id="token" required>
+    <input type="submit" name="submit" value="Send">
+</form>
+<h2> Get interactions for user </h2>
+<form name="getInteractions" method="post" action="./ws/interaction/getInteractions" target="right" onsubmit="addTokenToQueryString(this)">
+    <label for="token">Token</label>
+    <input type="text" name="token" id="token" required>
+    <input type="submit" name="submit" value="Send">
+</form>
+</body>
+</html>

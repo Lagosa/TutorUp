@@ -1,0 +1,2 @@
+INSERT INTO tutorup_user (username, password, first_name, last_name, email, dob, status, token, phone_number, skill, city, lang)
+VALUES ('Lagosa', 'abcdefgh','Zoltan','Varga','zoltanvarga18@yahoo.com','2001-08-02','NEW','zoli-token','0747694369','math, informatics, romanian','Cluj-Napoca','HU');

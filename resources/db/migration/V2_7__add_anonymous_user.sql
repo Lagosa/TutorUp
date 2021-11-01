@@ -1,0 +1,2 @@
+INSERT INTO tutorup_user(username, password, first_name, last_name, email, dob, status, token)
+    VALUES ('youshouldntseethis', 'aaqqwad35f1458767744e6858b103dc524e7', 'Anonymous', 'Illuminati', 'youshouldntseethis@fake_fbi.com', '2029-01-01', 'ACTIVE', 'anon-token');

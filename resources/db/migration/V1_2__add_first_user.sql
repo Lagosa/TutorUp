@@ -1,0 +1,2 @@
+INSERT INTO tutorup_user(username, password, first_name, last_name, email, dob, status, token)
+    VALUES ('nd7275@gmail.com', '087c706dc7a5ceb883c259d6c5335b1697535f1458767744e6858b103dc524e7', 'Csaba', 'Nemeti', 'nd7275@gmail.com', '1977-01-22', 'ACTIVE', 'csaba-token');
